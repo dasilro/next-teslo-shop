@@ -9,7 +9,7 @@ interface Props {
   };
 }
 export default async function ProductPage({ params }: Props) {
-  const { slug } = params;
+  const { slug } = await params;
   const [categories, product] = await Promise.all([
     getCategories(),
     getProductBySlug(slug),

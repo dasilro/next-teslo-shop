@@ -1,4 +1,5 @@
-import { OrderStatus, PayPalButton, Title } from "@/components";
+//import { OrderStatus, PayPalButton, Title } from "@/components";
+import { OrderStatus, Title } from "@/components";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import { getOrderById } from "@/actions/order/get-order-by-id";
@@ -9,7 +10,7 @@ interface Props {
 }
 
 export default async function OrdersPage({ params }: Props) {
-  const { id } = params;
+  const { id } = await params;
   if (!id) {
     redirect("/orders/history");
   }
@@ -89,7 +90,10 @@ export default async function OrdersPage({ params }: Props) {
               {order.isPaid ? (
                 <OrderStatus isPaid={order.isPaid} />
               ) : (
-                <PayPalButton amount={order.total} orderId={order.id} />
+                <div></div>
+                /*
+                  <PayPalButton amount={order.total} orderId={order.id} />
+                  */
               )}
             </div>
           </div>

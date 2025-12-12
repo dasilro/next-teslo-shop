@@ -11,7 +11,7 @@ interface Props {
   };
 }
 export default async function CategoryPage({ params, searchParams }: Props) {
-  const { gender } = params;
+  const { gender } = await params;
   if (!Object.values(Gender).includes(gender as Gender)) {
     redirect("/");
   }
@@ -23,7 +23,9 @@ export default async function CategoryPage({ params, searchParams }: Props) {
     unisex: "para todos",
   };
 
-  const page = searchParams.page ? parseInt(searchParams.page) : 1;
+  const pageStr = (await searchParams).page;
+  const page = pageStr ? parseInt(pageStr) : 1;
+
   const { products, totalPages } = await getPaginatedProductsWithImages(
     {
       page,
